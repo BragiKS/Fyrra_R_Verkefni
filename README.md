@@ -1,6 +1,6 @@
 # Fyrra_R_Verkefni
 
-Um gögnin
+# Um gögnin
 
 Í verkefninu munuð þið vinna með Kaupskrá fasteigna en Kaupskrá fasteigna inniheldur upplýsingar sem Þjóðskrá skráir upp úr þinglýstum kaupsamningum. Þar má meðal annars finna upplýsingar um kaupverð, dagsetningu kaupsamnings og staðsetningu fasteignar. Kaupsamningar geta verið um íbúðarhúsnæði, sumarhús eða atvinnuhúsnæði. Við munum aðeins vinna með gögn um íbúðarhúsnæði í þessu verkefni.
 
@@ -10,7 +10,7 @@ Hér má finna lýsingu á breytunum í safninu.
 
 Gögnin eru aðgengileg héðan: https://ahj.hi.is/kaupaskra.csv
 
-Skil
+# Skil
 
 Verkefnið á að vinna í .Rmd skrá en skila á .html skrá.  .html skráin verður til í sömu möppu og .Rmd skráin þegar þið prjónið.
 
@@ -23,10 +23,12 @@ Frágangur gildir 10% af einkunn fyrir verkefnið (merkja verkefni með nafni og
 Verkefnið
 Búið til nýtt verkefni (e. project) fyrir verkefnið í vinnumöppunni ykkar. Skýrið verkefnið fyrra_r. Munið að hafa klump efst í .Rmd skránni ykkar með library() skipunum fyrir þá pakka sem þið ætlið að nota.
 
-Hluti 1 - Gagnamöndl (30 %)
+# Hluti 1 - Gagnamöndl (30 %)
+
 Síðasti séns til að fá aðstoð við þennan hluta er 16. febrúar.
 
-a) Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og geymið í hlut sem ber upphafsstafi þeirra sem verkefnið vinna (ef Gréta Halldórsdóttir og Sigurður Karl Jónsson eru að vinna saman skulu þau nefna hlutinn gs).
+a) 
+Lesið gagnasafnið inn í R/RStudio með skipuninni hér að neðan og geymið í hlut sem ber upphafsstafi þeirra sem verkefnið vinna (ef Gréta Halldórsdóttir og Sigurður Karl Jónsson eru að vinna saman skulu þau nefna hlutinn gs).
 
 nafn_a_hlut <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
 
@@ -47,7 +49,8 @@ Veljið ykkur þrjú póstnúmer til að vinna með. Það þurfa að vera a.m.k
 f)
 Kannið gerð breytanna í gagnarammanum ykkar og breytið ef þarf.  
 
-Hluti 2 - Myndræn framsetning (30%)
+# Hluti 2 - Myndræn framsetning (30%)
+
 Síðasti séns til að fá aðstoð við þennan hluta er 23. febrúar.
 
 g)
@@ -62,7 +65,8 @@ Teiknið mynd sem sýnir stærð eignanna eftir póstnúmeri.
 j)
 Teiknið mynd sem sýnir samaband stærðar og kaupverðs fyrir hvert póstnúmer fyrir sig (notið t.d. facet_grid til að skipta myndinni upp eftir póstnúmerum). Notið mismunadi liti til að sýna hvaða ár eignirnar voru keyptar. Eru einhverjir gagnapunktar sem koma í ljós sem mögulega þarf að skoða sérstaklega? Ef svo er skulið þið gera það. 
 
-Hluti 3 - Töflur (20%)
+# Hluti 3 - Töflur (20%)
+
 Síðasti séns til að fá aðstoð við þennan hluta er 1. mars.
 
 k)
@@ -74,7 +78,7 @@ Búið til töflu sem sýnir hlutfall sérbýla og fjölbýla í póstnúmerunum
 m)
 Búið til töflu sem sýnir meðaltal, miðgildi og staðalfrávik fermetraverðs skipt upp eftir ári, póstnúmeri og tegund eigna (sérbýli eða fjölbýli). Sýnið einnig fjölda eigna sem lenda í hverjum flokki í töflunni. Það á t.d. að vera hægt að lesa hvert meðalfermetraverð eigna í sérbýli var árið 2021 í hverju póstnúmeri fyrir sig og hversu margir kaupsamingar eru að baki. 
 
-Hluti 4 - Líkindafræði (10%)
+# Hluti 4 - Líkindafræði (10%)
 
 Síðasti séns til að fá aðstoð við þennan hluta er 1. mars.
 
