@@ -24,28 +24,28 @@ Við ætlum að vinna með bla bla \n
 
 ```{r}
 #a
-bsss <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
+bss <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
 
 #b
-bsss <- bsss %>%
+bss <- bss %>%
   filter(fullbuid == 1, 
          tegund %in% c("Fjolbyli", "Serbyli"),
          onothaefur_samningur == 1)
 
 #c
-bsss <- bsss %>%
+bss <- bss %>%
   mutate(fermetraverd = kaupverd / einflm)
 
 #d
-bsss <- bsss %>%
+bss <- bss %>%
   mutate(utgdag = as.Date(utgdag, format = "%Y-%m-%d"),
          ar = year(utgdag))
 
 #e
-bsss_selected <- bsss %>%
+bss_selected <- bss %>%
   filter(postnr %in% c(221, 200, 210))
 
-serbyli_count <- bsss_selected %>%
+serbyli_count <- bss_selected %>%
   filter(tegund == "Serbyli") %>%
   group_by(postnr) %>%
   summarise(fjoldi_serbyli = n())
@@ -58,7 +58,7 @@ print(serbyli_count)
 
 ```{r}
 #g
-ggplot(bsss_selected, aes(x = einflm)) +
+ggplot(bss_selected, aes(x = einflm)) +
   geom_histogram(binwidth = 10, fill = "blue", color = "black") +
   theme_minimal() +
   labs(title = "Dreifing stærða eignar",
@@ -66,10 +66,10 @@ ggplot(bsss_selected, aes(x = einflm)) +
        y = "Magn")
 
 #h
-bsss_filtered <- bsss_selected %>%
+bss_filtered <- bss_selected %>%
   filter(tegund %in% c("Serbyli", "Fjolbyli"))
 
-ggplot(bsss_filtered, aes(x = factor(postnr), fill = tegund)) +
+ggplot(bss_filtered, aes(x = factor(postnr), fill = tegund)) +
   geom_bar(position = "dodge") +
   theme_minimal() +
   labs(title = "Magn eigna á póstnúmer og Tegund",
@@ -78,7 +78,7 @@ ggplot(bsss_filtered, aes(x = factor(postnr), fill = tegund)) +
        fill = "Tegund")
 
 #i
-ggplot(bsss_selected, aes(x = factor(postnr), y = einflm)) +
+ggplot(bss_selected, aes(x = factor(postnr), y = einflm)) +
   geom_boxplot() +
   theme_minimal() +
   labs(title = "eignar stærð eftir Póstnúmeri",
@@ -86,7 +86,7 @@ ggplot(bsss_selected, aes(x = factor(postnr), y = einflm)) +
        y = "Stærð")
 
 #j
-ggplot(bsss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
+ggplot(bss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
   geom_point(alpha = 0.6) +
   facet_grid(~ postnr) +
   scale_color_viridis_d() +
@@ -102,7 +102,7 @@ ggplot(bsss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
 ## hluti 3
 ```{r}
 #k
-property_counts <- bsss_filtered %>%
+property_counts <- bss_filtered %>%
   group_by(postnr, tegund) %>%
   summarise(fjoldi_eigna = n()) %>%
   ungroup()
@@ -111,7 +111,7 @@ print(property_counts)
 
 #l
 
-property_type_counts <- bsss_selected %>%
+property_type_counts <- bss_selected %>%
   filter(tegund %in% c("Serbyli", "Fjolbyli")) %>%
   count(postnr, tegund)
 
@@ -135,7 +135,7 @@ property_type_percentages <- property_type_proportions %>%
 print(property_type_percentages)
 
 #m
-summary_table <- bsss_filtered %>%
+summary_table <- bss_filtered %>%
   group_by(ar, postnr, tegund) %>%
   summarise(
     Medaltal_Fermetraverd = mean(fermetraverd, na.rm = TRUE),
