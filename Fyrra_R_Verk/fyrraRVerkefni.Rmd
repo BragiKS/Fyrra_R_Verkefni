@@ -1,0 +1,86 @@
+---
+title: "Fyrra R verkefni"
+author: "stt27@hi.is"
+date: "2024-01-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+```
+
+## hluti 1
+Við ætlum að vinna með bla bla \n
+*italic*
+**Bold**
+
+```{r}
+#a
+bsss <- read_csv2("https://ahj.hi.is/kaupskra.csv", locale = locale(encoding = "ISO8859-1"))
+
+#b
+bsss <- bsss %>%
+  filter(fullbuid == 1, 
+         tegund %in% c("Fjolbyli", "Serbyli"),
+         onothaefur_samningur == 1)
+
+#c
+bsss <- bsss %>%
+  mutate(fermetraverd = kaupverd / einflm)
+
+#d
+bsss <- bsss %>%
+  mutate(utgdag = as.Date(utgdag, format = "%Y-%m-%d"),
+         ar = year(utgdag))
+
+#e
+bsss_selected <- bsss %>%
+  filter(postnr %in% c(270, 200, 210))
+
+serbyli_count <- bsss_selected %>%
+  filter(tegund == "Serbyli") %>%
+  group_by(postnr) %>%
+  summarise(fjoldi_serbyli = n())
+
+print(serbyli_count)
+
+
+```
+## hluti 2
+
+```{r}
+#g
+ggplot(bsss_selected, aes(x = einflm)) +
+  geom_histogram(binwidth = 10, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Dreiginf stærða eignar",
+       x = "stærð (flm)",
+       y = "Magn")
+
+#h
+bsss_filtered <- bsss_selected %>%
+  filter(tegund %in% c("Serbyli", "Fjolbyli"))
+
+ggplot(bsss_filtered, aes(x = factor(postnr), fill = tegund)) +
+  geom_bar(position = "dodge") +
+  theme_minimal() +
+  labs(title = "Magn eigna á póstnúmer og Tegund",
+       x = "Póstnúmer",
+       y = "Magn",
+       fill = "Tegund")
+
+#i
+ggplot(bsss_selected, aes(x = factor(postnr), y = einflm)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Property Size by Postal Code",
+       x = "Postal Code",
+       y = "Size (Square Meters)")
+```
