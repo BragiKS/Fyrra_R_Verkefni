@@ -14,6 +14,7 @@ library(tidyverse)
 library(lubridate)
 library(dplyr)
 library(ggplot2)
+Sys.setlocale("LC_ALL", "Icelandic_Iceland.1252")
 ```
 
 ## hluti 1
@@ -42,7 +43,7 @@ bsss <- bsss %>%
 
 #e
 bsss_selected <- bsss %>%
-  filter(postnr %in% c(270, 200, 210))
+  filter(postnr %in% c(221, 200, 210))
 
 serbyli_count <- bsss_selected %>%
   filter(tegund == "Serbyli") %>%
@@ -60,7 +61,7 @@ print(serbyli_count)
 ggplot(bsss_selected, aes(x = einflm)) +
   geom_histogram(binwidth = 10, fill = "blue", color = "black") +
   theme_minimal() +
-  labs(title = "Dreiginf stærða eignar",
+  labs(title = "Dreifing stærða eignar",
        x = "stærð (flm)",
        y = "Magn")
 
@@ -80,7 +81,75 @@ ggplot(bsss_filtered, aes(x = factor(postnr), fill = tegund)) +
 ggplot(bsss_selected, aes(x = factor(postnr), y = einflm)) +
   geom_boxplot() +
   theme_minimal() +
-  labs(title = "Property Size by Postal Code",
-       x = "Postal Code",
-       y = "Size (Square Meters)")
+  labs(title = "eignar stærð eftir Póstnúmeri",
+       x = "Póstnúmer",
+       y = "Stærð")
+
+#j
+ggplot(bsss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
+  geom_point(alpha = 0.6) +
+  facet_grid(~ postnr) +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(title = "Tengsl á milli stæðar og kaupverðs eigna eftir póstnúmeri",
+       x = "Stærð",
+       y = "Kaupverð",
+       color = "sölu ár") +
+  theme(legend.position = "bottom") # Move the legend to the bottom
+
+```
+
+## hluti 3
+```{r}
+#k
+property_counts <- bsss_filtered %>%
+  group_by(postnr, tegund) %>%
+  summarise(fjoldi_eigna = n()) %>%
+  ungroup()
+
+print(property_counts)
+
+#l
+
+property_type_counts <- bsss_selected %>%
+  filter(tegund %in% c("Serbyli", "Fjolbyli")) %>%
+  count(postnr, tegund)
+
+property_type_spread <- property_type_counts %>%
+  pivot_wider(names_from = tegund, values_from = n, values_fill = list(n = 0))
+
+property_type_proportions <- property_type_spread %>%
+  mutate(
+    Total = Serbyli + Fjolbyli,
+    Hlutfall_Serbyli = Serbyli / Total,
+    Hlutfall_Fjolbyli = Fjolbyli / Total
+  ) %>%
+  select(postnr, Hlutfall_Serbyli, Hlutfall_Fjolbyli)
+
+property_type_percentages <- property_type_proportions %>%
+  mutate(
+    Hlutfall_Serbyli = scales::percent(Hlutfall_Serbyli),
+    Hlutfall_Fjolbyli = scales::percent(Hlutfall_Fjolbyli)
+  )
+
+print(property_type_percentages)
+
+#m
+summary_table <- bsss_filtered %>%
+  group_by(ar, postnr, tegund) %>%
+  summarise(
+    Medaltal_Fermetraverd = mean(fermetraverd, na.rm = TRUE),
+    Midgildi_Fermetraverd = median(fermetraverd, na.rm = TRUE),
+    Stadalfraevik_Fermetraverd = sd(fermetraverd, na.rm = TRUE),
+    Fjoldi_Eigna = n()
+  ) %>%
+  ungroup()
+
+print(summary_table)
+
+```
+## hluti 4
+
+```{r}
+
 ```
