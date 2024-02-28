@@ -1,21 +1,22 @@
 ---
 title: "Fyrra R verkefni"
 author: "stt27@hi.is"
-date: "2024-01-31"
-output: html_document
+date: "`r Sys.Date()`"
+output: rmdformats::readthedown
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 library(tidyverse)
+library(knitr)
+install.packages("kableExtra")
+library(kableExtra)
 library(lubridate)
 library(dplyr)
 library(ggplot2)
 Sys.setlocale("LC_ALL", "Icelandic_Iceland.1252")
 ```
+
 
 ## hluti 1
 Við ætlum að vinna með bla bla \n
@@ -50,8 +51,9 @@ serbyli_count <- bss_selected %>%
   group_by(postnr) %>%
   summarise(fjoldi_serbyli = n())
 
-print(serbyli_count)
-
+serbyli_count %>%
+  kbl(col.names = c("Póstnr.", "Fjöldi Sérbýla"), align = "c") %>%
+  kable_classic_2(full_width = F)
 
 ```
 ## hluti 2
@@ -107,7 +109,9 @@ property_counts <- bss_filtered %>%
   summarise(fjoldi_eigna = n()) %>%
   ungroup()
 
-print(property_counts)
+property_counts %>%
+  kbl(col.names = c("Póstnr.", "Tegund", "Fjöldi eigna"), align = "c") %>%
+  kable_classic_2(full_width = F)
 
 #l
 
@@ -132,7 +136,9 @@ property_type_percentages <- property_type_proportions %>%
     Hlutfall_Fjolbyli = scales::percent(Hlutfall_Fjolbyli)
   )
 
-print(property_type_percentages)
+property_type_percentages %>%
+  kbl(col.names = c("Póstnr.", "Hlutfall Sérbýli", "Fjöldi Fjölbýli"), align = "c") %>%
+  kable_classic_2(full_width = F)
 
 #m
 summary_table <- bss_filtered %>%
@@ -145,7 +151,9 @@ summary_table <- bss_filtered %>%
   ) %>%
   ungroup()
 
-print(summary_table)
+summary_table %>%
+  kbl(col.names = c("Ár", "Póstnr.", "Tegund", "Meðaltal Fermetraverð", "Miðgildi Fermetraverð", "Staðalfrávik Fermetraverð", "Fjöldi Eigna"), align = "c") %>%
+  kable_classic_2(full_width = F)
 
 ```
 ## hluti 4
