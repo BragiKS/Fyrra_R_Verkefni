@@ -9,7 +9,6 @@ output: rmdformats::readthedown
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 library(tidyverse)
 library(knitr)
-install.packages("kableExtra")
 library(kableExtra)
 library(lubridate)
 library(dplyr)
@@ -18,10 +17,8 @@ Sys.setlocale("LC_ALL", "Icelandic_Iceland.1252")
 ```
 
 
-## hluti 1
-Við ætlum að vinna með bla bla \n
-*italic*
-**Bold**
+## Hluti 1
+Hér er grunnurinn setur upp með því að lesa inn gögnin okkar og skilgreina nokkrar breytur til þess að auðvelda okkur það að vinna með gögnin seinna í verkefninu\n
 
 ```{r}
 #a
@@ -57,6 +54,8 @@ serbyli_count %>%
 
 ```
 ## hluti 2
+
+blabla
 
 ```{r}
 #g
@@ -102,6 +101,9 @@ ggplot(bss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
 ```
 
 ## hluti 3
+
+blabla
+
 ```{r}
 #k
 property_counts <- bss_filtered %>%
@@ -158,6 +160,9 @@ summary_table %>%
 ```
 ## hluti 4
 
+blabla
+
 ```{r}
+#WIP
 
 ```
