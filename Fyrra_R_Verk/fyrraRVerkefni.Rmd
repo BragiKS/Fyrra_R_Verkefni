@@ -1,6 +1,6 @@
 ---
 title: "Fyrra R verkefni"
-author: "stt27@hi.is"
+author: "stt27@hi.is, bks9@hi.is, sak38@hi.is"
 date: "`r Sys.Date()`"
 output: rmdformats::readthedown
 ---
@@ -17,7 +17,7 @@ Sys.setlocale("LC_ALL", "Icelandic_Iceland.1252")
 ```
 
 
-## Hluti 1
+## Hluti 1 - Gagnamöndl
 Hér er grunnurinn setur upp með því að lesa inn gögnin okkar og skilgreina nokkrar breytur til þess að auðvelda okkur það að vinna með gögnin seinna í verkefninu\n
 
 ```{r}
@@ -53,9 +53,8 @@ serbyli_count %>%
   kable_classic_2(full_width = F)
 
 ```
-## hluti 2
+## Hluti 2 - Myndræn framsetning
 
-blabla
 
 ```{r}
 #g
@@ -100,9 +99,8 @@ ggplot(bss_selected, aes(x = einflm, y = kaupverd, color = as.factor(ar))) +
 
 ```
 
-## hluti 3
+## Hluti 3 - Töflur
 
-blabla
 
 ```{r}
 #k
@@ -158,11 +156,35 @@ summary_table %>%
   kable_classic_2(full_width = F)
 
 ```
-## hluti 4
+## Hluti 4 - Líkindafræði
 
-blabla
 
 ```{r}
-#WIP
+#n
 
+#i
+ni <- dbinom(1, 3, 0.2)
+ni <- ni*100
+#ii
+nii <- 1-pbinom(1, 3, 0.2)
+nii <- nii*100
+
+#o
+
+#i
+oi <- round(1 - pnorm(180, 170, 20), digits = 3) * 100
+#ii
+oii <- round(qnorm(1-0.05, 170, 20), digits = 1)
 ```
+
+**n)** <br>
+&nbsp; **i)** 
+Líkurnar á því að 1 eign sé einbýlishús ef við veljum 3 eignir af handahófi úr hverfi með 20% líkur á því að eign sé einbýlishús eru `r ni`%. <br>
+&nbsp; **ii)**
+Líkurnar á því að fleiri en 1 eign séu einbýlishús `r nii`%. <br>
+
+**o)**<br>
+&nbsp; **i)**
+Líkurnar á því að eign sé stærri en 180fm ef stærð eibýlishúsa í hverfinu fylgi normaldreifingu með meðaltali 170fm og staðalfrávik 20fm er `r oi`%.<br>
+&nbsp; **ii)**
+Jonni þarf amk. `r oii`fm stórt einbýlishús til að vera í hópi 5% stærstu einbýlishúsanna í hverfinu.
